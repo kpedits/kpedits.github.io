@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Interface</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #output { margin-top: 20px; }
+    </style>
+</head>
 <body>
+    <h1>ChatGPT Request</h1>
+    <textarea id="input" rows="4" cols="50" placeholder="Enter your question here..."></textarea><br>
+    <button id="submit">Submit</button>
+    <div id="output"></div>
 
-<h2>HTML1 Iframes</h2>
-<p>You can use the height and width attributes to specify the size of the iframe:</p>
-
-<iframe width="560" height="315" src="https://youtu.be/v6QtjD2udYM?si=zlf2pcdxg0VZ0LmZ" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
-
-<iframe src="https://chat.openai.com" width="600" height="400"></iframe>
-
-
+    <script>
+        document.getElementById('submit').addEventListener('click', async () => {
+            const userInput = document.getElementById('input').value;
+            const response = await fetch('YOUR_BACKEND_URL', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ input: userInput }),
+            });
+            const data = await response.json();
+            document.getElementById('output').innerText = data.output;
+        });
+    </script>
 </body>
 </html>
-
